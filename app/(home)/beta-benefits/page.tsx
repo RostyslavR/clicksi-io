@@ -1,4 +1,4 @@
-import { Navigation } from '@/components/navigation'
+import { ClientNavigation as Navigation } from '@/components/ClientNavigation'
 import { BetaBenefits } from '@/components/beta-benefits'
 
 export default function BetaBenefitsPage() {

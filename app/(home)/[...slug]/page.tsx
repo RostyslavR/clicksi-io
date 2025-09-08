@@ -1,6 +1,6 @@
 'use client'
 
-import { Navigation } from '@/components/navigation'
+import { ClientNavigation as Navigation } from '@/components/ClientNavigation'
 import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'

@@ -40,10 +40,16 @@ const ClicksiLogo = () => (
 
 export function Navigation() {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const { currentLanguage, availableLanguages, changeLanguage } = useLanguage();
+  const [isMounted, setIsMounted] = useState(false);
+  const { currentLanguage, availableLanguages, changeLanguage, isInitialized } = useLanguage();
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Prevent hydration mismatch by ensuring client-side only rendering
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -62,6 +68,24 @@ export function Navigation() {
     changeLanguage(language);
     setIsLanguageOpen(false);
   };
+
+  // Don't render until we're mounted and contexts are initialized
+  if (!isMounted || !isInitialized || authLoading) {
+    return (
+      <nav className="bg-[#090909] py-4 px-6 lg:px-8 border-b border-[#202020]">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <Link className="flex items-end gap-2" href="/">
+            <ClicksiLogo />
+            <span className="bg-[#D78E59] text-[#171717] px-2 py-1 rounded text-xs font-semibold">Beta</span>
+          </Link>
+          <div className="flex items-center gap-4">
+            <div className="w-20 h-8 bg-[#202020] rounded animate-pulse" />
+            <div className="w-32 h-8 bg-[#202020] rounded animate-pulse" />
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className="bg-[#090909] py-4 px-6 lg:px-8 border-b border-[#202020]">

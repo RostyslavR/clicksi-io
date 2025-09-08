@@ -1,4 +1,4 @@
-import { Navigation } from '@/components/navigation'
+import { ClientNavigation as Navigation } from '@/components/ClientNavigation'
 import { Features } from '@/components/features'
 
 export default function FeaturesPage() {

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { useUserRole } from '@/hooks/useUserRole'
 import { useTranslation } from '@/contexts/LanguageContext'
-import { Navigation } from '@/components/navigation'
+import { ClientNavigation as Navigation } from '@/components/ClientNavigation'
 import { 
   User, 
   Activity, 

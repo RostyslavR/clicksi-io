@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 
 export function AuthButton() {
+  const [isMounted, setIsMounted] = useState(false)
   const { user, signOut, loading: authLoading, updateUserLanguage } = useAuth()
   const { userProfile, isAdmin, loading: roleLoading } = useUserRole()
   
@@ -27,6 +28,11 @@ export function AuthButton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
+  
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
   
   const languages = [
     { code: 'uk', name: 'Українська', flag: '🇺🇦' },
@@ -68,8 +74,8 @@ export function AuthButton() {
     }
   }
 
-  // Loading state
-  if (authLoading || roleLoading) {
+  // Loading state or not mounted (prevents hydration mismatch)
+  if (!isMounted || authLoading || roleLoading) {
     return (
       <div className="w-8 h-8 bg-[#202020] rounded-full animate-pulse" />
     )

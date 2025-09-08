@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useUserRole } from '@/hooks/useUserRole'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Navigation } from '@/components/navigation'
+import { ClientNavigation as Navigation } from '@/components/ClientNavigation'
 import Link from 'next/link'
 import { 
   User, 

@@ -1,4 +1,4 @@
-import { Navigation } from '@/components/navigation'
+import { ClientNavigation as Navigation } from '@/components/ClientNavigation'
 import { About } from '@/components/about'
 
 export default function AboutPage() {

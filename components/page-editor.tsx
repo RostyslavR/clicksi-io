@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Editor } from '@monaco-editor/react';
 import { editor } from 'monaco-editor';
-import { Navigation } from '@/components/navigation';
+import { ClientNavigation as Navigation } from '@/components/ClientNavigation';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';

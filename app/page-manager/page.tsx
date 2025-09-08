@@ -1,6 +1,6 @@
 'use client'
 
-import { Navigation } from '@/components/navigation'
+import { ClientNavigation as Navigation } from '@/components/ClientNavigation'
 import { useState, useEffect } from 'react'
 import { useTranslation } from '@/contexts/LanguageContext'
 import { jsonToHtml, htmlToText, ContentNode } from '@/lib/content-converter'
