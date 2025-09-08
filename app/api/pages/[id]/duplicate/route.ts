@@ -41,17 +41,17 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       }
     }
     
-    // Create the duplicate page
+    // Create the duplicate page - handle different data types properly
     const newPage = await queryRow(`
       INSERT INTO pages (title, slug, meta_description, meta_keywords, content, created_at, updated_at)
-      VALUES ($1, $2, $3, $4, $5, NOW(), NOW())
+      VALUES ($1, $2, $3, $4, $5::jsonb, NOW(), NOW())
       RETURNING *
     `, [
       `${originalPage.title} (Copy)`,
       newSlug,
       originalPage.meta_description,
-      originalPage.meta_keywords,
-      originalPage.content
+      originalPage.meta_keywords, // Keep as array for text[] column
+      typeof originalPage.content === 'string' ? originalPage.content : JSON.stringify(originalPage.content)
     ])
     
     if (!newPage) {
