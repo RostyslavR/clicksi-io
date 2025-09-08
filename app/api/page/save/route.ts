@@ -52,17 +52,17 @@ export async function POST(request: NextRequest) {
       // Update existing page
       result = await queryRow(`
         UPDATE pages 
-        SET title = $1, content = $2, meta_description = $3, meta_keywords = $4, updated_at = NOW()
+        SET title = $1, content = $2::jsonb, meta_description = $3, meta_keywords = $4, updated_at = NOW()
         WHERE slug = $5
         RETURNING *
-      `, [title, JSON.stringify(finalJsonContent), description, JSON.stringify(keywordArray), slug])
+      `, [title, JSON.stringify(finalJsonContent), description, keywordArray, slug])
     } else {
       // Insert new page
       result = await queryRow(`
         INSERT INTO pages (title, slug, content, meta_description, meta_keywords, created_at, updated_at)
-        VALUES ($1, $2, $3, $4, $5, NOW(), NOW())
+        VALUES ($1, $2, $3::jsonb, $4, $5, NOW(), NOW())
         RETURNING *
-      `, [title, slug, JSON.stringify(finalJsonContent), description, JSON.stringify(keywordArray)])
+      `, [title, slug, JSON.stringify(finalJsonContent), description, keywordArray])
     }
 
     if (!result) {
