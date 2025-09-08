@@ -41,6 +41,26 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       }
     }
     
+    // Prepare content data with validation
+    let contentData;
+    try {
+      if (typeof originalPage.content === 'string') {
+        // If it's a string, validate it's proper JSON
+        JSON.parse(originalPage.content);
+        contentData = originalPage.content;
+      } else if (originalPage.content) {
+        // If it's an object/array, stringify it
+        contentData = JSON.stringify(originalPage.content);
+      } else {
+        // Default to empty array
+        contentData = JSON.stringify([]);
+      }
+    } catch (error) {
+      console.error('Invalid JSON in content:', error);
+      // Fallback to empty array if JSON is malformed
+      contentData = JSON.stringify([]);
+    }
+
     // Create the duplicate page - handle different data types properly
     const newPage = await queryRow(`
       INSERT INTO pages (title, slug, meta_description, meta_keywords, content, created_at, updated_at)
@@ -51,7 +71,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       newSlug,
       originalPage.meta_description,
       originalPage.meta_keywords, // Keep as array for text[] column
-      typeof originalPage.content === 'string' ? originalPage.content : JSON.stringify(originalPage.content)
+      contentData
     ])
     
     if (!newPage) {
