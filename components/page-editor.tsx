@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Editor } from '@monaco-editor/react';
 import { editor } from 'monaco-editor';
+import { Navigation } from '@/components/navigation';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
@@ -442,7 +443,9 @@ export default function PageEditor() {
   }
 
   return (
-    <div className="container mx-auto p-6 max-w-6xl">
+    <>
+      <Navigation />
+      <div className="container mx-auto p-6 max-w-6xl">
       {/* Notification Display */}
       {notification && (
         <Card className={`mb-4 border-l-4 ${
@@ -980,6 +983,7 @@ export default function PageEditor() {
           )}
         </CardContent>
       </Card>
-    </div>
+      </div>
+    </>
   );
 }

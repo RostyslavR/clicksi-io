@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { useUserRole } from '@/hooks/useUserRole'
 import { useTranslation } from '@/contexts/LanguageContext'
+import { Navigation } from '@/components/navigation'
 import { 
   User, 
   Activity, 
@@ -29,8 +30,10 @@ export function UserDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#EDECF8]">
-      <div className="max-w-7xl mx-auto p-6">
+    <>
+      <Navigation />
+      <div className="min-h-screen bg-[#0A0A0A] text-[#EDECF8]">
+        <div className="max-w-7xl mx-auto p-6">
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center gap-4">
             <Link
@@ -103,6 +106,7 @@ export function UserDashboard() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }

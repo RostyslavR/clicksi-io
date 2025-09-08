@@ -4,6 +4,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useUserRole } from '@/hooks/useUserRole'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { Navigation } from '@/components/navigation'
 import Link from 'next/link'
 import { 
   User, 
@@ -54,8 +55,10 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#EDECF8]">
-      <div className="max-w-7xl mx-auto p-6">
+    <>
+      <Navigation />
+      <div className="min-h-screen bg-[#0A0A0A] text-[#EDECF8]">
+        <div className="max-w-7xl mx-auto p-6">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center gap-4">
@@ -190,6 +193,7 @@ export default function AdminDashboardPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }
